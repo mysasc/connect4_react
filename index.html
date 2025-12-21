@@ -1,26 +1,127 @@
+<!-- ...existing code... -->
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <!--
-      manifest.json provides metadata used when the web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-    -->
-    <title>Connect 4</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vier gewinnt — Kurzdokumentation</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Vier gewinnt - Kurzdokumentation</h1>
+      <p class="subtitle">Team: Myriam Schaad und Colin Dubuis</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- <section class="card">
+      <h2>Team</h2>
+      <ul class="plain-list">
+        <li>Myriam</li>
+        <li>Colin</li>
+      </ul>
+    </section> -->
+
+    <section class="card">
+      <h2>Funktionsübersicht</h2>
+      <p>Die Anwendung bietet folgende Kernfunktionen, die durch den Custom Hook <code>useConnectFour</code> gesteuert werden:</p>
+
+    <ul>
+        <li><strong>Spielzug (Drop Piece):</strong>
+            Durch Klicken auf eine Spalte fällt der Spielstein ("Gravity Logic") auf den tiefstmöglichen freien Platz. Der Zug wechselt automatisch zwischen Rot und Blau.
+        </li>
+        <li><strong>Gewinnprüfung (Win Check):</strong>
+            Nach jedem Zug prüft der Algorithmus automatisch in vier Richtungen, ob vier gleiche Steine verbunden sind:
+            <ul>
+                <li>Horizontal</li>
+                <li>Vertikal</li>
+                <li>Diagonal (unten-rechts)</li>
+                <li>Diagonal (oben-rechts)</li>
+            </ul>
+        </li>
+        <li><strong>Undo-Funktion:</strong>
+            Ermöglicht das Rückgängigmachen des letzten Zuges. Der Spielstatus wird auf den vorherigen Zustand aus der History zurückgesetzt.
+        </li>
+        <li><strong>Speichern & Laden (Persistence):</strong>
+            Der aktuelle Spielstand inklusive Historie kann im <code>localStorage</code> des Browsers gespeichert und später wieder geladen werden.
+        </li>
+        <li><strong>Reset (Neues Spiel):</strong>
+            Setzt das Spielfeld und die Historie auf den Anfangszustand zurück.
+        </li>
+    </ul>
+      <!-- <ul>
+        <li>2‑Spieler Spiel (Blau vs. Rot). Anzeige des nächsten Zuges.</li>
+        <li>Klick auf Spalte — Figur fällt nach unten (Schwerkraft).</li>
+        <li>Win‑Erkennung: 4 in einer Reihe (horizontal, vertikal, diagonal).</li>
+        <li>Buttons: Neues Spiel, Undo, Save, Load, Link zur Doku.</li>
+        <li>Save/Load speichert in localStorage.</li>
+      </ul> -->
+    </section>
+
+    <section class="card">
+      <h2>Wichtige Implementierungsdetails</h2>
+      <h3>Technologie-Stack</h3>
+    <p>Das Projekt wurde mit folgenden Technologien umgesetzt:</p>
+    <ul>
+        <li><strong>Framework:</strong> React (v19)</li>
+        <li><strong>Build Tool:</strong> Vite</li>
+        <li><strong>Sprache:</strong> JavaScript (ES6+) / JSX</li>
+        <li><strong>Styling:</strong> CSS3 (Grid Layout & Flexbox)</li>
+    </ul>
+
+    <h3>Architektur & Code-Struktur</h3>
+    <p>Die Anwendung folgt dem Prinzip der "Separation of Concerns" (Trennung der Zuständigkeiten):</p>
+    
+    <ul>
+        <li><strong>View (<code>ConnectFour.jsx</code>):</strong> 
+            Verantwortlich für die Darstellung der Benutzeroberfläche. Das Board wird mittels CSS Grid (7 Spalten x 6 Zeilen) gerendert. Es enthält keine Spielelogik, sondern konsumiert diese nur.
+        </li>
+        <li><strong>Logic (<code>useConnectFour.js</code>):</strong> 
+            Ein Custom Hook, der den kompletten <code>useState</code> für das Board, den aktuellen Spieler und den Spielstatus (Game Over) verwaltet. 
+        </li>
+        <li><strong>Datenhaltung:</strong> 
+            Das Spielfeld wird als 2D-Array (6x7) repräsentiert. Ein <code>History</code>-Array speichert vergangene Zustände für die Undo-Funktion.
+        </li>
+        <li><strong>Storage Service:</strong> 
+            Ein integrierter Service kapselt die Zugriffe auf den <code>localStorage</code>, um Speicher- und Ladefehler abzufangen (Error Handling).
+        </li>
+    </ul>
+    </section>
+
+    <section class="card">
+      <h2>Bedienung</h2>
+      <ul>
+        <li>Klick auf Spalte um einen Stein zu setzen.</li>
+        <li><strong>Undo</strong> entfernt letzten Zug (falls vorhanden).</li>
+        <li><strong>Save</strong> speichert den aktuellen Stand und <strong>Load</strong> lädt den zuletzt gespeicherten Zustand.</li>
+        <li><strong>Link zur Doku</strong> öffnet diese Seite in einem neuen Tab.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Besonderheiten</h2>
+      <ul>
+        <li><strong>Animationen:</strong> CSS Keyframes (<code>@keyframes drop</code>) sorgen für eine flüssige Animation beim Einwerfen der Steine.</li>
+        <li><strong>Responsivität:</strong> Das Layout passt sich mittels Media Queries (<code>max-width: 800px</code>) an mobile Endgeräte an, wobei die Anordnung der Steuerelemente und die Größe des Boards optimiert werden.</li>
+      </ul>
+      <!-- <div class="shots">
+        <figure>
+          <img src="screenshot-board.png" alt="Spielbrett — evt. Screenshot ??">
+          <figcaption>Spielbrett</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshot-controls.png" alt="Controls — Screenshot ?">
+          <figcaption>Controls</figcaption>
+        </figure>
+      </div> -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    Brought to you by a Miniprojekt from the ZHAW WBE course 
+  </footer>
+</body>
 </html>
