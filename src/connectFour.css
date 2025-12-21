@@ -88,8 +88,8 @@ button:hover {
 .board {
     display: grid;
     /* Use grid instead of flex-wrap for pixel-perfect 7x6 alignment */
-    grid-template-columns: repeat(7, 7vw);
-    grid-template-rows: repeat(6, 7vw);
+    grid-template-columns: repeat(7, 6vw);
+    grid-template-rows: repeat(6, 6vw);
     background-color: beige; /* */
     outline: 1px solid black;
     width: fit-content;
@@ -97,8 +97,8 @@ button:hover {
 
 .field {
     border: 1px solid black;
-    width: 7vw; /* */
-    height: 7vw; /* */
+    width: 6vw; /* */
+    height: 6vw; /* */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,8 +111,8 @@ button:hover {
 
 /* Pieces */
 .piece {
-    width: 5vw; /* */
-    height: 5vw; /* */
+    width: 4.5vw; /* */
+    height: 4.5vw; /* */
     border-radius: 50%;
 }
 
