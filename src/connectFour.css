@@ -1,0 +1,158 @@
+/* Global Reset & Typography */
+.c4-container {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    background-color: burlywood;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.title {
+    background-color: #302e2e; 
+    height: 100px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Layout Wrapper (Replaces float logic) */
+.game-layout {
+    display: flex;
+    flex-grow: 1;
+    align-items: center; /* Vertically centers the content */
+    justify-content: center;
+    padding: 20px;
+    gap: 5vw;
+    height: calc(100vh - 227px);
+}
+
+/* Sidebar Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    padding: 130px;
+}
+
+.status {
+    width: 230px;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2); 
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.control-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 250px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #333; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    transition: background-color 0.2s ease;
+    height: 50px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Game Board */
+.board {
+    display: grid;
+    /* Use grid instead of flex-wrap for pixel-perfect 7x6 alignment */
+    grid-template-columns: repeat(7, 7vw);
+    grid-template-rows: repeat(6, 7vw);
+    background-color: beige; /* */
+    outline: 1px solid black;
+    width: fit-content;
+}
+
+.field {
+    border: 1px solid black;
+    width: 7vw; /* */
+    height: 7vw; /* */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.field:hover {
+    background-color: #c6c5c5;
+}
+
+/* Pieces */
+.piece {
+    width: 5vw; /* */
+    height: 5vw; /* */
+    border-radius: 50%;
+}
+
+.piece.blue {
+    background-color: blue;
+    animation: drop 0.3s ease-out;
+}
+
+.piece.red {
+    background-color: red;
+    animation: drop 0.3s ease-out;
+}
+
+.error-msg {
+    color: #900;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.5);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Animations */
+@keyframes drop {
+    from { transform: translateY(-300%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Mobile Responsiveness for small screens */
+@media (max-width: 800px) {
+    .game-layout {
+        flex-direction: column-reverse;
+        height: auto;
+    }
+
+    .board {
+        /* Scale down on mobile to fit screen */
+        grid-template-columns: repeat(7, 12vw);
+        grid-template-rows: repeat(6, 12vw);
+    }
+
+    .field { width: 12vw; height: 12vw; }
+    .piece { width: 9vw; height: 9vw; }
+}

@@ -4,7 +4,7 @@
   --card:#ffffff;
   --accent:#2b6df6;
   --muted:#6b7280;
-  --maxw:1300px;
+  --maxw:980px;
   --radius:12px;
   --gap:18px;
 }
@@ -28,13 +28,13 @@ body{
   box-shadow:0 3px 8px rgba(16,24,40,0.08);
 }
 .hero-inner{max-width:var(--maxw);margin:0 auto}
-.hero h1{margin:0;font-weight:600;font-size:30px;letter-spacing:0.2px; padding:10px}
-.subtitle{margin:6px 0 0;color:rgba(255,255,255,0.85);font-weight:300;font-size:16px}
+.hero h1{margin:0;font-weight:600;font-size:20px;letter-spacing:0.2px; padding:10px}
+.subtitle{margin:6px 0 0;color:rgba(255,255,255,0.85);font-weight:300;font-size:10px}
 
 .container{
   max-width:var(--maxw);
-  margin:30px auto;
-  padding:0 18px 15px;
+  margin:15px auto;
+  padding:0 18px 0px;
   display:grid;
   grid-template-columns:1fr;
   gap:var(--gap);
@@ -44,15 +44,15 @@ body{
   background:var(--card);
   border-radius:var(--radius);
   color: var(--muted);
-  padding: 30px;
-  font-size: 18px;
+  padding: 20px;
+  font-size: 10px;
   box-shadow:0 6px 20px rgba(15,23,42,0.06);
   border:1px solid rgba(15,23,42,0.04);
 }
 
 .card h2{
   margin:0 0 10px;
-  font-size: 25px;
+  font-size: 15px;
   color:var(--accent);
 }
 
@@ -81,10 +81,10 @@ body{
 
 .footer{
   max-width:var(--maxw);
-  margin:0 auto 30px;
-  padding:8px 18px;
+  margin:0 auto 5px;
+  padding:8px 10px;
   color:var(--muted);
-  font-size:13px;
+  font-size:9px;
   text-align:center;
 }
 
