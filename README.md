@@ -1,9 +1,9 @@
 # Connect 4 with React
 
-How to start the Game: 
-
-#### `npm run dev`
-
 Teammembers: Colin and Myriam
+
+left to do: 
+- make view consistently german
+- maybe go through doc again, what else needs to be added there?
 
 
