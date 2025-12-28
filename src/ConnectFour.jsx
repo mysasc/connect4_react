@@ -35,10 +35,10 @@ const ConnectFour = () => {
 
                     <div className="control-actions">
                         <button onClick={actions.resetGame}>Neues Spiel</button>
-                        <button onClick={actions.undo}>Undo</button>
-                        <button onClick={actions.loadGame}>Load</button>
-                        <button onClick={actions.saveGame}>Save</button>
-                        <button onClick={() => actions.doku('/connect4_react/docs/connect4_doc.html')}>Link to Doku</button>
+                        <button onClick={actions.undo}>Spielzug zurück</button>
+                        <button onClick={actions.loadGame}>Spiel laden</button>
+                        <button onClick={actions.saveGame}>Spiel speichern</button>
+                        <button onClick={() => actions.doku('/connect4_react/docs/connect4_doc.html')}>Link zur Doku</button>
                     </div>
 
                     {meta.error && <div className="error-msg">{meta.error}</div>}

@@ -34,7 +34,7 @@ const StorageService = {
     load: () => {
         try {
             const stored = localStorage.getItem(CONFIG.STORAGE_KEY);
-            if (!stored) throw new Error("No saved game found.");
+            if (!stored) throw new Error("Kein gespeichertes Spiel gefunden.");
             return { success: true, data: JSON.parse(stored) };
         } catch (e) {
             console.error("Storage Load Failed:", e);
@@ -119,8 +119,8 @@ export const useConnectFour = () => {
 
     const saveGame = () => {
         const result = StorageService.save(gameState, history);
-        if (!result.success) setError("Failed to save game.");
-        else alert("Game saved locally.");
+        if (!result.success) setError("Spielspeicherung ist fehlgeschlagen.");
+        else alert("Spiel wurde gespeichert.");
     };
 
     const loadGame = () => {
@@ -153,7 +153,7 @@ export const useConnectFour = () => {
             setError(null);
         } catch (e) {
             console.error('Open doc failed', e);
-            setError('Could not open documentation.');
+            setError('Konnte die Dokumentation nicht öffnen.');
         }
     }, []);
 
