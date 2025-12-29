@@ -52,7 +52,7 @@ Die Anwendung wurde mit **React (v19)** und **Vite** entwickelt.
 Um das Projekt lokal auszuführen:
 
    ```bash
-   git clone <REPO_URL_HIER>
-   cd connect4-react
+   git clone https://github.com/mysasc/connect4_react.git
+   cd connect4_react
    npm install
    npm run dev 
