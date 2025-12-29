@@ -9,7 +9,7 @@ Dies ist eine Implementierung des Spieleklassikers "Vier gewinnt" mit React. Das
 ## Dokumentation
 Eine **technische Kurzdokumentation** (Funktionsübersicht, Implementierungsdetails und Architektur) ist direkt in der Anwendung hinterlegt über den Button "Link zur Doku".
 
-**[Hier klicken, um direkt die Doku zu öffnen](public/docs/connect4_doc.html)**
+**[Hier klicken, um direkt die Doku zu öffnen](https://mysasc.github.io/connect4_react/docs/connect4_doc.html)**
 
 ---
 
