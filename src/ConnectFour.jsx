@@ -1,12 +1,20 @@
+/** * @module ConnectFour
+ * View-Komponente für das Spielfeld und die Steuerung.
+ */
 import React from 'react';
 import { useConnectFour } from './useConnectFour';
 import './ConnectFour.css';
 
+/**
+ * Kern-UI-Komponente zur Darstellung des Spielzustands.
+ * Nutzt useConnectFour Hook für die Geschäftslogik.
+ */
 const ConnectFour = () => {
     const { gameState, actions, meta } = useConnectFour();
     const { board, next, gameOver, winner } = gameState;
     const { CONFIG } = meta;
 
+    /** Status-Text-Ermittlung basierend auf gameOver-Status */
     const getStatusMessage = () => {
         if (gameOver) {
             return winner === CONFIG.PLAYERS.BLUE ? "BLAU GEWINNT!" : "ROT GEWINNT!";
@@ -14,6 +22,7 @@ const ConnectFour = () => {
         return next === CONFIG.PLAYERS.BLUE ? "Blau" : "Rot";
     };
 
+    /** Farbe für UI-Status-Indikator */
     const getStatusColor = () => {
         if (gameOver) return winner === CONFIG.PLAYERS.BLUE ? "blue" : "red";
         return next === CONFIG.PLAYERS.BLUE ? "blue" : "red";
@@ -24,7 +33,7 @@ const ConnectFour = () => {
             <div className="title"><h1>Vier gewinnt</h1></div>
 
             <div className="game-layout">
-                {/* Sidebar Controls */}
+                {/* Seitenleiste: Status und Systemsteuerung */}
                 <div className="controls">
                     <div className="status">
                         Nächster Zug: <br />
@@ -41,10 +50,11 @@ const ConnectFour = () => {
                         <button onClick={() => actions.doku('/connect4_react/docs/connect4_doc.html')}>Link zur Doku</button>
                     </div>
 
+                    {/* Fehlerausgabe aus dem Meta-State */}
                     {meta.error && <div className="error-msg">{meta.error}</div>}
                 </div>
 
-                {/* Game Board */}
+                {/* Spielfeld-Matrix-Rendering */}
                 <div className="board">
                     {board.map((row, y) => (
                         row.map((cell, x) => (
@@ -54,6 +64,7 @@ const ConnectFour = () => {
                                 onClick={() => actions.dropPiece(x)}
                                 data-testid={`cell-${y}-${x}`}
                             >
+                                {/* Bedingtes Rendering der Spielsteine */}
                                 {cell === CONFIG.PLAYERS.BLUE && <div className="piece blue" />}
                                 {cell === CONFIG.PLAYERS.RED && <div className="piece red" />}
                             </div>

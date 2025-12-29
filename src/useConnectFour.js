@@ -1,28 +1,34 @@
 import { useState, useCallback } from 'react';
 
-// --- Constants & Types ---
+/** * @constant CONFIG
+ * Spielparameter und Identifikatoren.
+ */
 const CONFIG = {
     ROWS: 6,
     COLS: 7,
     STORAGE_KEY: "C4_GAME_STATE",
     PLAYERS: { BLUE: 'b', RED: 'r' }
 };
-// --- Where the history is stored ---
 
-
+/** * @constant INITIAL_STATE
+ * Baseline-Zustand für System-Resets.
+ */
 const INITIAL_STATE = {
     board: Array(CONFIG.ROWS).fill(null).map(() => Array(CONFIG.COLS).fill('')),
     next: CONFIG.PLAYERS.BLUE,
     gameOver: false,
     winner: null
 };
+
+/** @var history Stack zur Verwaltung der Spielhistorie (Undo-Funktion). */
 let history = [INITIAL_STATE];
 
-// --- Storage Service ---
+/** * @namespace StorageService
+ * Dienst zur Persistierung des Spielzustands im LocalStorage.
+ */
 const StorageService = {
     save: (state, history) => {
-        //Pack state and History together
-        const pack = [state,history];
+        const pack = [state, history];
         try {
             localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(pack));
             return { success: true };
@@ -43,27 +49,29 @@ const StorageService = {
     }
 };
 
-// --- Win Detection Algorithm ---
+/** * @function checkWin
+ * Prüft auf 4 verbundene Steine (Horizontal, Vertikal, Diagonal).
+ */
 const checkWin = (board, player) => {
-    // Horizontal
+    // Horizontale Prüfung
     for (let r = 0; r < CONFIG.ROWS; r++) {
         for (let c = 0; c <= CONFIG.COLS - 4; c++) {
             if (board[r][c] === player && board[r][c+1] === player && board[r][c+2] === player && board[r][c+3] === player) return true;
         }
     }
-    // Vertical
+    // Vertikale Prüfung
     for (let c = 0; c < CONFIG.COLS; c++) {
         for (let r = 0; r <= CONFIG.ROWS - 4; r++) {
             if (board[r][c] === player && board[r+1][c] === player && board[r+2][c] === player && board[r+3][c] === player) return true;
         }
     }
-    // Diagonal Down-Right
+    // Diagonale Prüfung (Rechts-Abwärts)
     for (let r = 0; r <= CONFIG.ROWS - 4; r++) {
         for (let c = 0; c <= CONFIG.COLS - 4; c++) {
             if (board[r][c] === player && board[r+1][c+1] === player && board[r+2][c+2] === player && board[r+3][c+3] === player) return true;
         }
     }
-    // Diagonal Up-Right
+    // Diagonale Prüfung (Rechts-Aufwärts)
     for (let r = 3; r < CONFIG.ROWS; r++) {
         for (let c = 0; c <= CONFIG.COLS - 4; c++) {
             if (board[r][c] === player && board[r-1][c+1] === player && board[r-2][c+2] === player && board[r-3][c+3] === player) return true;
@@ -72,12 +80,14 @@ const checkWin = (board, player) => {
     return false;
 };
 
-// --- Custom Hook ---
+/** * @hook useConnectFour
+ * Zentraler State-Manager für die Spielmechanik.
+ */
 export const useConnectFour = () => {
     const [gameState, setGameState] = useState(INITIAL_STATE);
     const [error, setError] = useState(null);
 
-
+    /** Verarbeitet das Einwerfen eines Steins inkl. Schwerkraft-Logik. */
     const dropPiece = useCallback((colIndex) => {
         if (gameState.gameOver) return;
 
@@ -85,7 +95,6 @@ export const useConnectFour = () => {
             const newBoard = prev.board.map(row => [...row]);
             let placed = false;
 
-            // Gravity logic
             for (let y = CONFIG.ROWS - 1; y >= 0; y--) {
                 if (newBoard[y][colIndex] === '') {
                     newBoard[y][colIndex] = prev.next;
@@ -94,7 +103,7 @@ export const useConnectFour = () => {
                 }
             }
 
-            if (!placed) return prev; // Column full
+            if (!placed) return prev;
 
             const isWin = checkWin(newBoard, prev.next);
 
@@ -111,18 +120,21 @@ export const useConnectFour = () => {
         });
     }, [gameState.gameOver]);
 
+    /** Setzt alle Zustände auf Initialwerte zurück. */
     const resetGame = () => {
         setGameState(INITIAL_STATE);
         history = [INITIAL_STATE];
         setError(null);
     };
 
+    /** Speichert aktuellen State und Historie. */
     const saveGame = () => {
         const result = StorageService.save(gameState, history);
         if (!result.success) setError("Spielspeicherung ist fehlgeschlagen.");
         else alert("Spiel wurde gespeichert.");
     };
 
+    /** Lädt persistierten Zustand und stellt Historie wieder her. */
     const loadGame = () => {
         const result = StorageService.load();
         if (result.success) {
@@ -134,6 +146,7 @@ export const useConnectFour = () => {
         }
     };
 
+    /** Stellt den Zustand vor dem letzten validen Spielzug her. */
     const undo = () => {
         if(history.length > 1) {
             let previousState = history.pop();
@@ -142,11 +155,9 @@ export const useConnectFour = () => {
         else{
             setGameState(INITIAL_STATE);
         }
-
-
     }
 
-    // open documentation in a new tab
+    /** Navigiert zur externen HTML-Dokumentation. */
     const doku = useCallback((url = '/docs/connect4_doc.html') => {
         try {
             window.open(url, '_blank', 'noopener,noreferrer');
