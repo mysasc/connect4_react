@@ -30,6 +30,8 @@ Ziel ist es, als erste Person vier eigene Spielsteine (Rot oder Blau) in eine wa
 | **Spiel Laden** | Lädt den zuletzt gespeicherten Spielstand wieder. |
 | **Link zur Doku** | Öffnet die technische Projektbeschreibung in einem neuen Tab. |
 
+**[Hier klicken, um das Spiel zu öffnen](https://mysasc.github.io/connect4_react/)**
+
 ---
 
 ## Features & Technologie
@@ -44,6 +46,8 @@ Die Anwendung wurde mit **React (v19)** und **Vite** entwickelt.
 ---
 
 ## Installation & Setup
+
+**[Hier klicken, um zum Repo zu gelangen](https://github.com/mysasc/connect4_react/)**
 
 Um das Projekt lokal auszuführen:
 
